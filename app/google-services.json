@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "759966292650",
+    "project_id": "appmensajes-51ec2",
+    "storage_bucket": "appmensajes-51ec2.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:759966292650:android:ab5fb3a7b338845470ced3",
+        "android_client_info": {
+          "package_name": "com.example.appmensajeria"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCauO_JV8H80-Vwv88akoiNeByHoHe4AuI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
