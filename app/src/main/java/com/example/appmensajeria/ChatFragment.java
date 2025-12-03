@@ -11,12 +11,13 @@ import android.widget.EditText;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.fragment.NavHostFragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import androidx.appcompat.app.AppCompatActivity;
-
+import androidx.appcompat.widget.Toolbar;
 
 public class ChatFragment extends Fragment {
 
@@ -29,12 +30,6 @@ public class ChatFragment extends Fragment {
                              @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
 
-        AppCompatActivity act = (AppCompatActivity) requireActivity();
-        if (act.getSupportActionBar() != null) {
-            act.getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        }
-
-
         setHasOptionsMenu(true);
 
         View v = inflater.inflate(R.layout.fragment_chat, container, false);
@@ -44,7 +39,22 @@ public class ChatFragment extends Fragment {
         String toUid = args.getString("toUid");
         String name = args.getString("name");
 
-        requireActivity().setTitle(name);
+        // ⬅️ Barra morada con título y back
+        AppCompatActivity act = (AppCompatActivity) requireActivity();
+        if (act.getSupportActionBar() != null) {
+            act.getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            act.getSupportActionBar().setTitle(name);
+        }
+
+        // ⬅️ Hacer el título clickeable para abrir perfil
+        Toolbar toolbar = requireActivity().findViewById(R.id.toolbar);
+        toolbar.setClickable(true);
+        toolbar.setOnClickListener(view -> {
+            Bundle b = new Bundle();
+            b.putString("uid", toUid);
+            NavHostFragment.findNavController(ChatFragment.this)
+                    .navigate(R.id.otherProfileFragment, b);
+        });
 
         ChatApp app = (ChatApp) requireActivity().getApplication();
         String myUid = app.firebase.currentUid();
@@ -74,7 +84,7 @@ public class ChatFragment extends Fragment {
                 rv.scrollToPosition(list.size() - 1);
         });
 
-        // <<--- ESTA PARTE DEBE IR DENTRO DEL onCreateView
+        // Click en mensaje → eliminar
         adapter.setListener(msg -> {
             new AlertDialog.Builder(getContext())
                     .setTitle("Borrar mensaje?")
@@ -95,5 +105,13 @@ public class ChatFragment extends Fragment {
         }
         return super.onOptionsItemSelected(item);
     }
-}
 
+    @Override
+    public void onPause() {
+        super.onPause();
+        // Remover el click para que no afecte a otros fragments
+        Toolbar toolbar = requireActivity().findViewById(R.id.toolbar);
+        toolbar.setClickable(false);
+        toolbar.setOnClickListener(null);
+    }
+}

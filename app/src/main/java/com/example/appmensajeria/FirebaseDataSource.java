@@ -40,6 +40,10 @@ public class FirebaseDataSource {
                     user.uid = a.getUser().getUid();
                     user.name = name;
                     user.email = email;
+                    user.apellido = "";
+                    user.bio = "Hola, estoy usando AppMensajeria";
+                    user.fotoPerfil = "";
+                    user.telefono = "";
 
                     db.child("users")
                             .child(user.uid)

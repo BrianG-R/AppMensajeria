@@ -13,15 +13,15 @@ import java.util.List;
 
 public class ContactsAdapter extends RecyclerView.Adapter<ContactsAdapter.VH> {
 
-    public interface OnContactClick {
-        void onClick(UserEntity user);
+    public interface OnChatClick {
+        void onChat(UserEntity user);
     }
 
     private final List<UserEntity> items = new ArrayList<>();
-    private final OnContactClick clickListener;
+    private final OnChatClick chatListener;
 
-    public ContactsAdapter(OnContactClick clickListener) {
-        this.clickListener = clickListener;
+    public ContactsAdapter(OnChatClick chatListener) {
+        this.chatListener = chatListener;
     }
 
     public void submitList(List<UserEntity> list) {
@@ -30,6 +30,7 @@ public class ContactsAdapter extends RecyclerView.Adapter<ContactsAdapter.VH> {
         notifyDataSetChanged();
     }
 
+    // 🔹 ViewHolder
     static class VH extends RecyclerView.ViewHolder {
         TextView tvName;
 
@@ -44,20 +45,17 @@ public class ContactsAdapter extends RecyclerView.Adapter<ContactsAdapter.VH> {
     public VH onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.fragment_item_contact, parent, false);
-
-        VH holder = new VH(v);
-        v.setOnClickListener(view -> {
-            int pos = holder.getAdapterPosition();
-            if (pos != RecyclerView.NO_POSITION)
-                clickListener.onClick(items.get(pos));
-        });
-
-        return holder;
+        return new VH(v);
     }
 
     @Override
     public void onBindViewHolder(@NonNull VH holder, int position) {
-        holder.tvName.setText(items.get(position).name);
+
+        UserEntity user = items.get(position);
+        holder.tvName.setText(user.name);
+
+        // 👉 Tocando TODO el item se abre el chat
+        holder.itemView.setOnClickListener(v -> chatListener.onChat(user));
     }
 
     @Override

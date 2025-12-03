@@ -14,4 +14,10 @@ public class UserEntity {
 
     public String name;
     public String email;
+    public String apellido;
+    public String bio;
+    public String fotoPerfil;
+    public String telefono;
+
+    public UserEntity() {}
 }

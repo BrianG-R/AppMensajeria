@@ -16,14 +16,16 @@ public class ChatApp extends Application {
     public void onCreate() {
         super.onCreate();
 
-        // habilitar modo offline y cache necesario
+
         FirebaseDatabase.getInstance().setPersistenceEnabled(true);
 
         database = Room.databaseBuilder(
-                this,
-                AppDatabase.class,
-                "chat-db"
-        ).build();
+                        this,
+                        AppDatabase.class,
+                        "chat-db"
+                )
+                .fallbackToDestructiveMigration()
+                .build();
 
         firebase = new FirebaseDataSource();
 

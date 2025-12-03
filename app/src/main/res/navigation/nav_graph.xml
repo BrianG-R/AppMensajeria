@@ -29,6 +29,9 @@
         <action
             android:id="@+id/action_contactsFragment_to_chatFragment"
             app:destination="@id/chatFragment" />
+        <action
+            android:id="@+id/action_contactsFragment_to_profileFragment"
+            app:destination="@id/profileFragment" />
     </fragment>
 
     <fragment
@@ -42,6 +45,26 @@
             app:argType="string" />
         <argument
             android:name="name"
+            app:argType="string" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="com.example.appmensajeria.ProfileFragment">
+        <action
+            android:id="@+id/action_profileFragment_to_editProfileFragment"
+            app:destination="@id/editProfileFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/editProfileFragment"
+        android:name="com.example.appmensajeria.EditProfileFragment" />
+
+    <fragment
+        android:id="@+id/otherProfileFragment"
+        android:name="com.example.appmensajeria.OtherProfileFragment">
+        <argument
+            android:name="uid"
             app:argType="string" />
     </fragment>
 
