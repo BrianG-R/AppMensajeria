@@ -2,7 +2,7 @@ package com.example.appmensajeria;
 
 import com.hivemq.client.mqtt.MqttClient;
 import com.hivemq.client.mqtt.mqtt3.Mqtt3AsyncClient;
-import com.hivemq.client.mqtt.mqtt3.message.publish.Mqtt3Publish;
+import com.hivemq.client.mqtt.datatypes.MqttQos;
 
 import java.nio.charset.StandardCharsets;
 import java.util.UUID;
@@ -31,6 +31,7 @@ public class MqttManager {
     public static void subscribe(String chatId, MessageCallback callback) {
         client.subscribeWith()
                 .topicFilter("chat/" + chatId)
+                .qos(MqttQos.AT_LEAST_ONCE)  // ⭐ Garantiza que los mensajes lleguen mínimo una vez
                 .callback(publish -> {
                     String msg = new String(publish.getPayloadAsBytes(), StandardCharsets.UTF_8);
                     callback.onNewMessage(publish.getTopic().toString(), msg);
@@ -41,6 +42,7 @@ public class MqttManager {
     public static void publish(String chatId, String msg) {
         client.publishWith()
                 .topic("chat/" + chatId)
+                .qos(MqttQos.AT_LEAST_ONCE)  // ⭐ Asegura entrega del mensaje
                 .payload(msg.getBytes(StandardCharsets.UTF_8))
                 .send();
     }
