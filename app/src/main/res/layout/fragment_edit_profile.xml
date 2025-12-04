@@ -7,41 +7,66 @@
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal">
 
+        <!-- FOTO DE PERFIL -->
+        <ImageView
+            android:id="@+id/imgFotoPerfil"
+            android:layout_width="130dp"
+            android:layout_height="130dp"
+            android:layout_marginTop="16dp"
+            android:src="@drawable/ic_person"
+            android:scaleType="centerCrop"
+            android:background="@drawable/circle_background"
+            android:padding="6dp" />
+
+        <!-- BOTÓN CAMBIAR FOTO -->
+        <Button
+            android:id="@+id/btnCambiarFoto"
+            android:text="Cambiar foto"
+            android:layout_marginTop="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+
+        <!-- CAMPOS DEL PERFIL -->
         <EditText
             android:id="@+id/etNombre"
             android:hint="Nombre"
+            android:layout_marginTop="24dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
         <EditText
             android:id="@+id/etApellido"
             android:hint="Apellido"
+            android:layout_marginTop="12dp"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"/>
+            android:layout_height="wrap_content" />
 
         <EditText
             android:id="@+id/etBio"
             android:hint="Biografía"
+            android:layout_marginTop="12dp"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"/>
+            android:layout_height="wrap_content" />
 
         <EditText
             android:id="@+id/etTelefono"
             android:hint="Teléfono"
+            android:layout_marginTop="12dp"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"/>
+            android:layout_height="wrap_content" />
 
+
+        <!-- BOTÓN GUARDAR -->
         <Button
             android:id="@+id/btnGuardar"
             android:text="Guardar cambios"
+            android:layout_marginTop="24dp"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"/>
+            android:layout_height="wrap_content" />
 
     </LinearLayout>
 

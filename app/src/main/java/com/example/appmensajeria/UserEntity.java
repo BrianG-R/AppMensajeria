@@ -19,5 +19,6 @@ public class UserEntity {
     public String fotoPerfil;
     public String telefono;
 
+
     public UserEntity() {}
 }
